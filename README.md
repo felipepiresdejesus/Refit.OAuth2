@@ -4,7 +4,9 @@ Simple helpers for integrating Refit clients with OAuth2 authentication without 
 
 ## Features
 
-- Client credentials and authorization code flows.
+ - Supports all standard OAuth2 flows including client credentials,
+   authorization code, resource owner password and refresh token. Custom
+   grant types can also be used via a generic provider.
 - `DelegatingHandler` that automatically attaches Bearer tokens.
 - Extension methods for registering Refit clients with OAuth2.
 
@@ -52,4 +54,5 @@ dotnet pack src/Refit.OAuth2/Refit.OAuth2.csproj -c Release
 The resulting `.nupkg` file will be placed in the `bin/Release` directory and
 can be published to a NuGet feed.
 
-This library is meant as a small starting point and does not cover the full OAuth2 specification.
+This library aims to be compliant with the OAuth2 specification and can be
+extended with custom grant types if needed.
