@@ -2,6 +2,8 @@
 
 Simple helpers for integrating Refit clients with OAuth2 authentication without relying on IdentityModel or Duende packages.
 
+The NuGet package is published as **FJesus.Refit.OAuth2**.
+
 ## Features
 
 - Supports all standard OAuth2 flows including client credentials,
