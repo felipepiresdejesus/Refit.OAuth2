@@ -1,0 +1,25 @@
+name: Publish Pre-Release Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test tests/Refit.OAuth2.Tests/Refit.OAuth2.Tests.csproj --no-build --configuration Release
+      - name: Pack
+        run: dotnet pack src/Refit.OAuth2/Refit.OAuth2.csproj --configuration Release --no-build -p:VersionSuffix=preview-${{ github.run_number }} -o ./artifacts
+      - name: Publish
+        run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
